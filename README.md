@@ -19,4 +19,6 @@ jobs:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           jira-url: https://my.jira-server.com
           project-prefix: MYPROJ
+          # optional
+          jira-url-path: '/jira/browse/' 
 ```
