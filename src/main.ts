@@ -5,6 +5,7 @@ async function run(): Promise<void> {
   try {
     const token: string = core.getInput('repo-token');
     const jira: string = core.getInput('jira-url');
+    const jiraUrlPath: string = core.getInput('jira-url-path', '/jira/browse/');
     const projectPrefix: string = core.getInput('project-prefix');
     const octokit = github.getOctokit(token);
 
@@ -29,7 +30,7 @@ async function run(): Promise<void> {
 
     if (ticketMatches.length) {
       const ticketId = ticketMatches.reverse()[0]; // get last matching jira ticket
-      const body: string = `Jira Ticket: [${jira}/jira/browse/${ticketId}](${jira}/jira/browse/${ticketId})`;
+      const body: string = `Jira Ticket: [${jira}${jiraUrlPath}${ticketId}](${jira}${jiraUrlPath}${ticketId})`;
 
       const comments = await octokit.issues.listComments({
         issue_number,
